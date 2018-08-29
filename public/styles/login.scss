@@ -1,0 +1,133 @@
+.login {
+  @include flex-column-center;
+  
+  &__header {
+    @include flex-column;
+  }
+  
+  &__header--title {
+    margin-top: 1em;
+    font-size: 4em;
+    margin-bottom: 20px;
+    color: $blue;
+    font-family: 'Abril Fatface';
+  }
+  
+  &__btns {
+    display: flex;
+    justify-content: center;
+  }
+    
+  &__btn--on {
+    &:hover {
+      background-color: rgb(57, 115, 213);
+    }
+  }
+    
+  &__btn--off {
+    background-color: lightgray;
+    border: 1px solid lightgray;
+    color: white;
+    
+    &:hover {
+      background-color: rgb(57, 115, 213);
+    }
+  }
+  
+  &__form {
+    @include flex-column-center;
+    margin-top: 1.5em;
+  }
+
+  &__error {
+    color: $red;
+    font-size: 1em;
+    line-height: 30px;
+    height: 30px;
+    font-weight: 300;
+  }
+
+  &__btns--enter {
+    margin-top: 1.5em;
+
+    &:hover {
+      background-color: $mintGreen;
+      color: $blue;
+    }
+  }
+
+  &__btns--guest {
+    margin: 1.5em 0;
+    background-color: $mintGreen;
+    color: gray;
+    width: 116px;
+    font-size: 0.9em;
+    
+    &:hover {
+      color: $mintGreen;
+      background-color: $black;
+    }
+  }
+
+  &__input {
+    width: 7.5em;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    height: 30px;
+    line-height: 30px;
+    font-size: 2em;
+    text-align: center;
+    border-bottom: solid 2px $lightgray;
+    transition:all .3s ease-in;
+    padding: 10px;
+    color: $black;
+    background-color: transparent;
+
+    &:focus{
+      border-bottom: solid 1px $blue;
+      outline: none;
+    }
+
+    &::placeholder {
+      font-style: italic;
+      color: $placeholdergray;
+      margin-bottom: 5px;
+    }
+  }
+  
+  &__avatar--text {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: $blue;
+    font-weight: bold;
+  }
+  
+  &__avatar--list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  &__avatar--radio {
+    input + img {
+      width: 26px;
+      height: 26px;
+      margin: 0 2px 1px 2px;
+      line-height: 35px;
+      cursor: pointer;
+      transition:all .3s ease-in;
+      filter: brightness(0.4);
+      
+      &:hover {
+        filter: brightness(1);
+      }
+    }
+    
+    input:checked + img {
+      filter: brightness(1);
+      width: 35px;
+      height: 35px;
+    }
+  }
+}

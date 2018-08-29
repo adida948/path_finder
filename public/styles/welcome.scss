@@ -1,0 +1,198 @@
+.pic {
+  position: relative;
+  width: 100%;
+  
+  &__layer {
+    width: 100%;
+    filter: brightness(0.9);
+  }
+
+  #orangePic {
+    width: 100%;
+    height: 700px;
+  }
+  
+  &__text--main {
+    position: absolute;
+    z-index: 100;
+    top: 233px;
+    left: 88px;
+    width: 449px;
+    height: 200px;
+    overflow-wrap: break-word;
+    color: $thetalksWhite;
+    font-size: 48px;
+    font-family: 'Abril Fatface';
+  }
+  
+  &__text--sub {
+    position: absolute;
+    z-index: 100;
+    top: 456px;
+    left: 88px;
+    width: 449px;
+    height: 56px;
+    overflow-wrap: break-word;
+    color: $thetalksWhite;
+    font-size: 18px;
+    font-family: 'Lato';
+    font-weight: bold;
+  }
+  
+  &__btns--apple {
+    top: 535px;
+    left: 88px;
+    background: none;
+    border: none;
+  }
+  
+  &__btns--google {
+    top: 600px;
+    left: 88px;
+    background: none;
+    border: none;
+  }
+
+  #apple {
+    position: absolute;
+    top: 535px;
+    left: 88px;
+    width: 187px;
+    height: 45px;
+    border-radius: 20px;
+    
+    &:hover {
+      // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-bottom: 3px $thetalksYellow solid;
+      border-radius: 20px;
+    }
+  }
+
+  #google {
+    position: absolute;
+    top: 600px;
+    left: 88px;
+    width: 187px;
+    height: 50px;
+    
+    &:hover {
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+  }
+  
+  &__testimony {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    right: 74px;
+  }
+  
+  &__testimony--section {
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    width: 233px;
+    height: 131.6px;
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 15px;
+    margin-top: 71px;
+  }
+  
+  &__testimony--text {
+    position: relative;
+    font-size: 14px;
+    font-family: 'Lato';
+    color: $thetalksBlack;
+    margin: 33px 26px 0 26px;
+    width: 200px;
+  }
+  
+  &__testimony--name {
+    font-size: 12px;
+    font-family: 'Lato';
+    color: $thetalksBlack;
+    font-style: italic;
+    margin-left: 26px;
+  }
+  
+  #testimony {
+    position: absolute;
+    top: 77px;
+    left: 0;
+    width: 57.13px;
+    height: 57.13px;
+    border-radius: 100px;
+  }
+  
+  &__text--mid {
+    width: 910px;
+    height: 77px;
+    font-size: 24px;
+    font-family: 'Abril Fatface';
+    color: $thetalksGray;
+    text-align: center;
+    margin: 25px auto;
+  }
+  
+  &__bottom--pics {
+    display: flex;
+    width: 100%;
+    
+    img {
+      width: 100%;
+      height: 361px;
+    }
+  }
+  
+  &__text--bottomLayer {
+    width: 100%;
+    background-color: $thetalksPink;
+    height: 197px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  &__text--bottom {
+    width: 910px;
+    height: 47px;
+    font-size: 24px;
+    font-family: 'Abril Fatface';
+    color: $thetalksWhite;
+  }
+  
+  &__btn--learn {
+    width: 251px;
+    border: none;
+    
+    &:hover {
+      background-color: rgb(222, 155, 7);
+    }
+  }
+  
+  &__footer {
+    @include flex-center-center;
+    width: 100%;
+    height: 50px;
+    font-family: 'Abril Fatface';
+    color: $thetalksGray;
+    margin: auto;
+  }
+}
+
+.what,
+.who,
+.why {
+  img {
+    width: 100%;
+    height: 100vh;
+  }
+}
+
+#botModal {
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 610px;
+}

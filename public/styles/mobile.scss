@@ -1,0 +1,94 @@
+@media screen and (max-width: 630px) {
+  .login {
+    &__header--title {
+      margin: 0.5em auto;
+      font-size: 3em;
+    }
+  }
+  .chat-window {
+    width: 350px;
+  }
+  
+  .chat-window-left-section {
+    width: 100px;
+  }
+    
+  button.send {
+    height: 53px;
+    width: 53px;
+    font-size: 10px;
+    margin-left: 4px;
+  }
+  
+  .notice {
+    width: 340px;
+    top: 90px;
+    font-size: 17px;
+  }
+  
+  input#message {
+    width: 157px;
+  }
+  
+  .messages-list {
+    width: 233px;
+  }
+  
+  .users-list {
+    height: 339px;
+  }
+  
+  button.nav-btns-back {
+    width: 5em;
+    height: 2.9em;
+    line-height: 0;
+    margin: 0;
+  }
+  
+  .chatroom-title {
+    font-size: 2.4em;
+  }
+  
+  .message-text {
+    max-width: 200px;
+  }
+  
+  .imageUpload__fileName {
+    display: none;
+  }
+  
+  .imageUpload__fileName--mobile {
+    display: flex;
+  }
+  
+  .privateLock__footer--on {
+    font-size: 11px;
+  }
+  
+  .mic {
+    right: 240px;
+    
+    &__voice--modal {
+      width: 240px;
+      height: 120px;
+    }
+  }
+  
+  .voice {
+    &__title {
+      font-size: 15px;
+      
+      img {
+        width: 15px;
+        height: 15px;
+        margin-left: 5px;
+      }
+    }
+    
+    &__transcriptText {
+      min-width: 220px;
+      max-width: 220px;
+      height: 50px;
+    }
+  }
+}
