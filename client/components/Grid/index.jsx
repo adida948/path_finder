@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-
 import { SearchGrid, Agent } from './astar';
+
 import { rootUrl } from '../../../constants';
 
-class App extends Component {
+class Grid extends Component {
   constructor() {
     super();
     // Create grid and declate default start and goal positions
-    this.grid = new SearchGrid(30,30);
-    this.grid.cells[1].setProperty({ 'startPosition': true });
-    // this.grid.cells[3].setProperty({ 'goalPosition': true });
+    this.grid = new SearchGrid(25,25);
+    this.grid.cells[210].setProperty({ 'startPosition': true });
+    this.grid.cells[211].setProperty({ 'goalPosition': true });
     this.agent = new Agent(this.grid);
     this.state = {
       grid: this.grid,
@@ -59,12 +59,10 @@ class App extends Component {
   }
   
   mouseEvent(cellIndex, evt) {
+    console.log('cellIndex', cellIndex);
     if (evt.type === 'mouseup') {
-      console.log(cellIndex);
       this.mouseAction = null;
       this.grid.cells[cellIndex].removeProperty(['active']);
-      this.grid.cells[cellIndex].setProperty({ 'goalPosition': true });
-      this.agent = new Agent(this.grid);
       this.setState({
         grid: this.grid
       });
@@ -115,9 +113,7 @@ class App extends Component {
     if (this.state.closedList.indexOf(cellIndex) >= 0) {
       cellStyles.push('closedList');
     }
-    if (this.state.openList.indexOf(cellIndex) >= 0) {
-      cellStyles.push('openList');
-    }
+
     if (this.state.grid.cells[cellIndex].getProperty('wall')) {
       cellStyles.push('wall');
     }
@@ -135,42 +131,37 @@ class App extends Component {
   }
 
   render() {
-    let cellSize = 30;
-    // <img id="floor" src={`http://10.89.27.55:3000/images/floor.png`} alt="floor" />
+    let cellSize = 15;
 
     return (
-      <div className="demo">
+      <div className="grid">
+        <div id="map">
+          <img id="floor" src={`${rootUrl()}/images/floor.png`} alt="floor" />
+          <svg className={ this.state.mouseActive ? 'mouseActive' : '' } width={(this.state.grid.width*cellSize)+1} height={(this.state.grid.height*cellSize)+1}>{
+            this.state.grid.cells.map((cell, cellIndex) => {
+              let cellStyles = this.cellStyles(cellIndex);
+              console.log(cellSize);
+              return (
+                <g key={cellIndex}
+                  onMouseDown={this.mouseEvent.bind(this, cellIndex)}
+                  onMouseOver={this.mouseEvent.bind(this, cellIndex)}
+                  onMouseUp={this.mouseEvent.bind(this, cellIndex)}>
+                <rect               
+                  x={((cellIndex%this.grid.width)*cellSize)+1}
+                  y={(Math.floor(cellIndex/this.grid.width)*cellSize)+1}
+                  width={cellSize-1}
+                  height={cellSize-1}
+                  className={cellStyles.join(' ')} />
 
-        <svg className={ this.state.mouseActive ? 'mouseActive' : '' } width={(this.state.grid.width*cellSize)+1} height={(this.state.grid.height*cellSize)+1}>{
-          this.state.grid.cells.map((cell, cellIndex) => {
-            let cellStyles = this.cellStyles(cellIndex);
-            return (
-              <g key={cellIndex}
-                onMouseDown={this.mouseEvent.bind(this, cellIndex)}
-                onMouseOver={this.mouseEvent.bind(this, cellIndex)}
-                onMouseUp={this.mouseEvent.bind(this, cellIndex)}>
-              <rect               
-                x={((cellIndex%this.grid.width)*cellSize)+1}
-                y={(Math.floor(cellIndex/this.grid.width)*cellSize)+1}
-                width={cellSize-1}
-                height={cellSize-1}
-                className={cellStyles.join(' ')} />
-                { this.agent.cellData[cellIndex] && !cellStyles.some(r=> ['startPosition', 'goalPosition'].indexOf(r) >= 0) &&
-                  <text
-                    fontSize={10}
-                    x={((cellIndex%this.state.grid.width)*cellSize)+6}
-                    y={(Math.floor(cellIndex/this.state.grid.width)*cellSize)+20}>
-                      {this.agent.cellData[cellIndex].f }
-                  </text>
-                }
-              </g>
-            )
-          })
-        }</svg>
+                </g>
+              )
+            })
+          }</svg>
+        </div>
         <button onClick={this.run.bind(this)}>Run</button>{ " " }
       </div>
     );
   }
 }
 
-export default App;
+export default Grid;

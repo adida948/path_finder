@@ -1,53 +1,37 @@
-.grid {
+#map {
   position: relative;
   text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  height: 500px;
 }
 
 svg{
-  // position: absolute;
-  // top: 0;
-  // left: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
   border:2px solid #ccc;
   -ms-user-select: none;
   user-select: none;
 }
 svg:hover{
-  cursor:default;
+  cursor: pointer;
 }
 rect{
   fill: white;
-  fill-opacity: 0.7;
+  fill-opacity: 0.1;
 }
+
 .openList{
   fill:#bdb;
+  fill-opacity: 1;
 }
 .closedList{
   fill:#bdb;
+  fill-opacity: 1;
 }
 
 .path{
   fill:#99c;
+  fill-opacity: 1;
 }
 .current{
   fill:#fff;
@@ -56,31 +40,37 @@ rect{
   fill:#777;
   stroke:#666;
   stroke-width:2;
+  fill: black;
+  fill-opacity: 1;
 }
 .startPosition{
   fill:#d00;
   stroke:#a11;
   stroke-width:2;
   cursor:grab;
+  fill-opacity: 1;
 }
 .startPosition.active{
   fill:#a11;
+  fill-opacity: 1;
 }
 .goalPosition{
   fill:#0c0;
   stroke:#191;
   stroke-width:2;
   cursor:grab;
+  fill-opacity: 1;
 }
 .goalPosition.active{
   fill:#191;
+  fill-opacity: 1;
 }
 
-// #floor {
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   width: 400px;
-//   height: 400px;
-//   z-index: -1000;
-// }
+#floor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 375px;
+  height: 375px;
+  z-index: -1000;
+}
