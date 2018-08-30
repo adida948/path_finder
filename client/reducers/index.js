@@ -27,9 +27,13 @@ import {
   TOGGLE_LOCK,
   UNLOCK_PRIVATE_PASSWORD,
   TOGGLE_APP,
+  END_POS,
+  TOGGLE_END_POS,
 } from '../../constants';
 
 const initialState = {
+  endPos: 211,
+  endPosBool: false,
   auth: false,
   imgSrc: '',
   imgFileName: '',
@@ -60,6 +64,16 @@ const initialState = {
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case TOGGLE_END_POS:
+      return {
+        ...state,
+        endPosBool: payload,
+      };
+    case END_POS:
+      return {
+        ...state,
+        endPos: payload,
+      };
     case TOGGLE_APP:
       return {
         ...state,

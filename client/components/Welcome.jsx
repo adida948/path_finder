@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Grid from './Grid';
+import Path from './Grid/Path';
 import Header from './Header';
 
 class Welcome extends Component {
