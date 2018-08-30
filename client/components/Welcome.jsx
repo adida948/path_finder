@@ -2,11 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { startSocket } from '../actions/grid';
+
 import Grid from './Grid';
-import Path from './Grid/Path';
 import Header from './Header';
 
 class Welcome extends Component {
+  constructor(props) {
+    super(props);
+    this.props.startSocket();
+  }
+  
   render() {
     return (
       <div className="welcome">
@@ -23,7 +29,10 @@ const mapStateToProps = state => ({
 
 Welcome.propTypes = {
   auth: PropTypes.bool.isRequired,
+  startSocket: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, null)(Welcome);
+export default connect(mapStateToProps, {
+  startSocket,
+})(Welcome);
 

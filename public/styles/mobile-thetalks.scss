@@ -10,10 +10,8 @@
       justify-content: flex-end;
       margin: 0;
       
-      a {
         button {
           width: 70px;
-        }
       }
     }
     
@@ -29,7 +27,7 @@
       font-family: 'Lato';
       font-size: 14px;
       margin-bottom: 5px;
-      width: 0;
+      width: 55px;
       
       &:hover {
         color: rgb(222, 155, 7);
@@ -42,7 +40,7 @@
       width: 50px;
       height: 30px;
       border: none;
-      width: 0;
+      width: 72px;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       
       &:hover {
@@ -53,7 +51,7 @@
     &__about {
       display: flex;
       justify-content: flex-end;
-      width: 153px;
+      width: 190px;
       margin: 0;
       padding: 0;
       
@@ -68,6 +66,7 @@
         margin: 0;
         height: 24px;
         padding: 0;
+        margin-left: 10px;
         
         &:hover {
           border-bottom: 3px solid red;
@@ -88,9 +87,9 @@
     }
     
     &__title {
-      font-family: 'Abril Fatface';
+      font-family: 'Fredoka One';
       font-size: 24px;
-      color: $thetalksGray;
+      color: $blue;
       width: 190px;
       // height: 47px;
       margin-left: 10px;

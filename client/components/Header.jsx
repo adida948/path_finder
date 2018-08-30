@@ -3,12 +3,25 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { toggleFloors } from '../actions/grid';
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    
+    this.handleClick = this.handleClick.bind(this);
+  }
+  
+  handleClick(floor) {
+    return (e) => {
+      this.props.toggleFloors(floor);
+    }
+  }
+  
   render() {
     return (
       <div className="header">
-        <h1 className="header__title">AmexMeets</h1>
+        <h1 className="header__title">Amex Connect</h1>
         <div className="header__rightNav">
           <div className="header__auth">
             <button className="header__auth--login">
@@ -19,9 +32,9 @@ class Header extends Component {
             </button>
           </div>
           <div className="header__about">
-            <Link to="/what"><button className="header__about--what">Cafeteria</button></Link>
-            <Link to="/who"><button className="header__about--who">All floors</button></Link>
-            <Link to="/why"><button className="header__about--why">{'26th floor'}</button></Link>
+            <button onClick={this.handleClick('cafe')} className="header__about--what">Cafeteria</button>
+            <button onClick={this.handleClick('floor')}  className="header__about--who">Floor</button>
+            <button onClick={this.handleClick('aud')}  className="header__about--why">Auditorium</button>
           </div>
         </div>
       </div>
@@ -35,7 +48,10 @@ const mapStateToProps = state => ({
 
 Header.propTypes = {
   auth: PropTypes.bool.isRequired,
+  toggleFloors: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, null)(Header);
+export default connect(mapStateToProps, {
+  toggleFloors,
+})(Header);
 

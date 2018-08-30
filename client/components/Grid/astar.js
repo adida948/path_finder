@@ -1,4 +1,4 @@
-class GridCell {
+export class GridCell {
   constructor(properties = {}) {
     this.properties = properties;
   }

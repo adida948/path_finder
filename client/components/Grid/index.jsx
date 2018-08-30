@@ -1,57 +1,52 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { SearchGrid, Agent } from './astar';
 
+import { updateGrid } from '../../actions/grid';
 import { rootUrl } from '../../../constants';
 
 class Grid extends Component {
-  constructor() {
-    super();
-    // Create grid and declate default start and goal positions
-    this.grid = new SearchGrid(25, 25);
-    this.grid.cells[210].setProperty({ 'startPosition': true });
-    this.grid.cells[211].setProperty({ 'goalPosition': true });
-    this.grid.cells[5].setProperty({ wall: true });
-    this.agent = new Agent(this.grid);
-    this.state = {
-      grid: this.grid,
-      openList: this.agent.openList,
-      closedList: this.agent.closedList,
-      path: this.agent.path,
-      currentCell: this.agent.currentCell,
-    }
+  constructor(props) {
+    super(props);
 
     this.mouseAction = null;
     this.autoRun = false;
+    this.cellStyles = this.cellStyles.bind(this);
   }
 
   nextMove() {
-    this.agent.step();
-    this.setState({
-      openList: this.agent.openList,
-      closedList: this.agent.closedList,
-      path: this.agent.path,
-      currentCell: this.agent.currentCell
+    this.props.agent.step();
+    this.props.updateGrid({
+      openList: this.props.agent.openList,
+      closedList: this.props.agent.closedList,
+      path: this.props.agent.path,
+      currentCell: this.props.agent.currentCell,
+      grid: this.props.grid,
+      floor: this.props.floor,
     });
   }
 
   run() {
-    this.agent.run();
-    this.setState({
-      openList: this.agent.openList,
-      closedList: this.agent.closedList,
-      path: this.agent.path,
-      currentCell: this.agent.currentCell
+    this.props.agent.run();
+    this.props.updateGrid({
+      openList: this.props.agent.openList,
+      closedList: this.props.agent.closedList,
+      path: this.props.agent.path,
+      currentCell: this.props.agent.currentCell,
+      grid: this.props.grid,
+      floor: this.props.floor,
     });
   }
 
   reset() {
-    this.agent.reset();
-    this.setState({
-      openList: this.agent.openList,
-      closedList: this.agent.closedList,
-      path: this.agent.path,
-      currentCell: this.agent.currentCell,
-      grid: this.grid,
+    this.props.agent.reset();
+    this.props.updateGrid({
+      openList: this.props.agent.openList,
+      closedList: this.props.agent.closedList,
+      path: this.props.agent.path,
+      currentCell: this.props.agent.currentCell,
+      grid: this.props.grid,
+      floor: this.props.floor,
     });
 
     if (this.autoRun) {
@@ -60,12 +55,16 @@ class Grid extends Component {
   }
 
   mouseEvent(cellIndex, evt) {
-    console.log('cellIndex', cellIndex);
     if (evt.type === 'mouseup') {
       this.mouseAction = null;
-      this.grid.cells[cellIndex].removeProperty(['active']);
-      this.setState({
-        grid: this.grid
+      this.props.grid.cells[cellIndex].removeProperty(['active']);
+      this.props.updateGrid({
+        grid: this.props.grid,
+        openList: this.props.agent.openList,
+        closedList: this.props.agent.closedList,
+        path: this.props.agent.path,
+        currentCell: this.props.agent.currentCell,
+        floor: this.props.floor,
       });
       return;
     }
@@ -76,53 +75,58 @@ class Grid extends Component {
       return;
     }
 
-    if (this.mouseAction == null) {
-      if (this.grid.cells[cellIndex].getProperty('startPosition')) {
+    if (this.mouseAction === null) {
+      if (this.props.grid.cells[cellIndex].getProperty('startPosition')) {
         this.mouseAction = function (cellIndex) {
-          this.grid.removeAll('startPosition');
-          this.grid.cells[cellIndex].setProperty({ 'startPosition': true });
-        }
-      } else if (this.grid.cells[cellIndex].getProperty('goalPosition')) {
-        this.mouseAction = function (cellIndex) {
-          this.grid.removeAll('goalPosition');
-          this.grid.cells[cellIndex].setProperty({ 'goalPosition': true });
+          this.props.grid.removeAll('startPosition');
+          this.props.grid.cells[cellIndex].setProperty({ startPosition: true });
         };
-      } else if (this.grid.cells[cellIndex].getProperty('wall')) {
+      } else if (this.props.grid.cells[cellIndex].getProperty('goalPosition')) {
         this.mouseAction = function (cellIndex) {
-          // this.grid.cells[cellIndex].removeProperty(['wall']);
+          this.props.grid.removeAll('goalPosition');
+          this.props.grid.cells[cellIndex].setProperty({ goalPosition: true });
+        };
+      } else if (this.props.grid.cells[cellIndex].getProperty('wall')) {
+        this.mouseAction = function (cellIndex) {
+          this.props.grid.cells[cellIndex].removeProperty(['wall']);
         };
       } else {
         this.mouseAction = function (cellIndex) {
-          this.grid.removeAll("goalPosition");
-          this.grid.cells[cellIndex].setProperty({ goalPosition: true });
+          this.props.grid.removeAll('goalPosition');
+          this.props.grid.cells[cellIndex].setProperty({ goalPosition: true });
+          
+          this.props.updateGrid({
+            grid: this.props.grid,
+            floor: this.props.floor,
+          });
         };
       }
     }
 
-    this.grid.cells[cellIndex].setProperty({ 'active': true });
+    this.props.grid.cells[cellIndex].setProperty({ active: true });
     this.mouseAction(cellIndex);
-    this.reset();
+    this.reset.bind(this);
   }
 
   cellStyles(cellIndex) {
-    let cellStyles = [];
-    if (this.state.currentCell === cellIndex) {
-      cellStyles.push('current');
+    let arr = [];
+    if (this.props.currentCell === cellIndex) {
+      arr.push('current');
     }
-    if (this.state.path.indexOf(cellIndex) >= 0) {
-      cellStyles.push('path');
+    if (this.props.path.indexOf(cellIndex) >= 0) {
+      arr.push('path');
     }
-    if (this.state.closedList.indexOf(cellIndex) >= 0) {
-      cellStyles.push('closedList');
-    }
-
-    if (this.state.grid.cells[cellIndex].getProperty('wall')) {
-      cellStyles.push('wall');
+    if (this.props.closedList.indexOf(cellIndex) >= 0) {
+      arr.push('closedList');
     }
 
-    cellStyles = cellStyles.concat(Object.keys(this.state.grid.cells[cellIndex].properties));
+    if (this.props.grid.cells[cellIndex].getProperty('wall')) {
+      arr.push('wall');
+    }
 
-    return cellStyles;
+    arr = arr.concat(Object.keys(this.props.grid.cells[cellIndex].properties));
+
+    return arr;
   }
 
   autoRunEvent(evt) {
@@ -133,38 +137,65 @@ class Grid extends Component {
   }
 
   render() {
-    let cellSize = 15;
+    const cellSize = 15;
 
-    return (
-      <div className="grid">
-        <div id="map">
-          <img id="floor" src={`${rootUrl()}/images/floor.png`} alt="floor" />
-          <svg className={this.state.mouseActive ? 'mouseActive' : ''} width={(this.state.grid.width * cellSize) + 1} height={(this.state.grid.height * cellSize) + 1}>{
-            this.state.grid.cells.map((cell, cellIndex) => {
-              let cellStyles = this.cellStyles(cellIndex);
-              console.log(cellSize);
-              return (
-                <g key={cellIndex}
-                  onMouseDown={this.mouseEvent.bind(this, cellIndex)}
-                  onMouseOver={this.mouseEvent.bind(this, cellIndex)}
-                  onMouseUp={this.mouseEvent.bind(this, cellIndex)}
-                  onTouchEnd={this.mouseEvent.bind(this, cellIndex)}>
-                  <rect
-                    x={((cellIndex % this.grid.width) * cellSize) + 1}
-                    y={(Math.floor(cellIndex / this.grid.width) * cellSize) + 1}
-                    width={cellSize - 1}
-                    height={cellSize - 1}
-                    className={cellStyles.join(' ')} />
-
-                </g>
-              )
-            })
-          }</svg>
+    if (this.props.grid) {
+      return (
+        <div className="grid">
+          <div id="map">
+            <img id="floor" src={`${rootUrl()}/images/${this.props.floor}.png`} alt="floor" />
+            <svg
+              className={this.props.mouseActive ? 'mouseActive' : ''}
+              width={this.props.grid.width * cellSize + 1}
+              height={this.props.grid.height * cellSize + 1}
+            >
+              {this.props.grid.cells.map((cell, cellIndex) => {
+                const cellStyles = this.cellStyles(cellIndex);
+                console.log(cellSize);
+                return (
+                  <g
+                    key={cellIndex}
+                    onMouseDown={this.mouseEvent.bind(this, cellIndex)}
+                    onMouseOver={this.mouseEvent.bind(this, cellIndex)}
+                    onMouseUp={this.mouseEvent.bind(this, cellIndex)}
+                    onTouchEnd={this.mouseEvent.bind(this, cellIndex)}
+                  >
+                    <rect
+                      x={(cellIndex % this.props.grid.width) * cellSize + 1}
+                      y={Math.floor(cellIndex / this.props.grid.width) * cellSize + 1}
+                      width={cellSize - 1}
+                      height={cellSize - 1}
+                      className={cellStyles.join(' ')}
+                    />
+                  </g>
+                );
+              })}
+            </svg>
+          </div>
+          <button id="runBtn" onClick={this.run.bind(this)}>Find me!</button>{' '}
         </div>
-        <button onClick={this.run.bind(this)}>Run</button>{" "}
-      </div>
-    );
+      );
+    }
+
+    return null;
   }
 }
 
-export default Grid;
+const mapStateToProps = state => {
+  return ({
+    grid: state.grid,
+    openList: state.openList,
+    closedList: state.closedList,
+    path: state.path,
+    currentCell: state.currentCell,
+    agent: state.agent,
+    floor: state.floor,
+  });
+};
+
+export default connect(
+  mapStateToProps,
+  {
+    updateGrid,
+  },
+)(Grid);

@@ -71,9 +71,8 @@ module.exports = (socket) => {
     io.emit(STOPPED_TYPING_PRIVATE, username);
   });
 
-  socket.on(END_POS, (cellIndex) => {
-    console.log('here?');
-    io.emit(END_POS, cellIndex);
+  socket.on(END_POS, (obj) => {
+    io.emit(END_POS, obj);
   });
 
   socket.on(PING_PONG, () => {
