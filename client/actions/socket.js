@@ -5,7 +5,7 @@ export const socket = io(rootUrl());
 
 export const initSocket = (dispatch) => {
   socket.on('connect', () => {
-    console.log('welcome to AmexMeets!');
+    console.log('WebSockets established!');
   });
 
   setInterval(() => {
