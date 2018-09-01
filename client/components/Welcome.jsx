@@ -12,7 +12,7 @@ class Welcome extends Component {
     super(props);
     this.props.startSocket();
   }
-  
+
   render() {
     return (
       <div className="welcome">
@@ -28,11 +28,12 @@ const mapStateToProps = state => ({
 });
 
 Welcome.propTypes = {
-  auth: PropTypes.bool.isRequired,
   startSocket: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, {
-  startSocket,
-})(Welcome);
-
+export default connect(
+  mapStateToProps,
+  {
+    startSocket,
+  },
+)(Welcome);

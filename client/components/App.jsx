@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 import Welcome from './Welcome';
 
@@ -17,13 +15,5 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  auth: state.auth,
-});
-
-App.propTypes = {
-  auth: PropTypes.bool.isRequired,
-};
-
-export default connect(mapStateToProps, null)(App);
+export default App;
 
