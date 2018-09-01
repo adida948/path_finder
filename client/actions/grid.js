@@ -1,7 +1,7 @@
-import { FLOOR, END_POS, TOGGLE_END_POS, END_POS_ONLY } from '../../constants';
+import { FLOOR, END_POS } from '../../constants';
 import { socket, initSocket } from './socket';
 
-export const setEndPos = currentCell => (dispatch) => {
+export const setEndPos = currentCell => () => {
   socket.emit(END_POS, currentCell);
 };
 
@@ -9,12 +9,8 @@ export const startSocket = () => (dispatch) => {
   initSocket(dispatch);
 };
 
-export const updateGrid = obj => (dispatch) => {
+export const updateGrid = obj => () => {
   socket.emit(END_POS, obj);
-};
-
-export const updateGridOnly = grid => (dispatch) => {
-  socket.emit(END_POS_ONLY, grid);
 };
 
 export const toggleFloors = floor => (dispatch) => {

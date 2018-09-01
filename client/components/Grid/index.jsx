@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SearchGrid, Agent } from './astar';
 
 import { updateGrid } from '../../actions/grid';
 import { rootUrl } from '../../../constants';
@@ -94,7 +93,7 @@ class Grid extends Component {
         this.mouseAction = function (cellIndex) {
           this.props.grid.removeAll('goalPosition');
           this.props.grid.cells[cellIndex].setProperty({ goalPosition: true });
-          
+
           this.props.updateGrid({
             grid: this.props.grid,
             floor: this.props.floor,
@@ -172,7 +171,9 @@ class Grid extends Component {
               })}
             </svg>
           </div>
-          <button id="runBtn" onClick={this.run.bind(this)}>Find me!</button>{' '}
+          <button id="runBtn" onClick={this.run.bind(this)}>
+            Find me!
+          </button>{' '}
         </div>
       );
     }
@@ -181,17 +182,15 @@ class Grid extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return ({
-    grid: state.grid,
-    openList: state.openList,
-    closedList: state.closedList,
-    path: state.path,
-    currentCell: state.currentCell,
-    agent: state.agent,
-    floor: state.floor,
-  });
-};
+const mapStateToProps = state => ({
+  grid: state.grid,
+  openList: state.openList,
+  closedList: state.closedList,
+  path: state.path,
+  currentCell: state.currentCell,
+  agent: state.agent,
+  floor: state.floor,
+});
 
 export default connect(
   mapStateToProps,
