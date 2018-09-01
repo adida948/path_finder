@@ -1,1 +1,5 @@
-# growth hack 2018 @ amex
+# Real-time Path Finder
+- MERN Stack
+- SVG
+- WebSockets
+- A* algorithm
