@@ -23,17 +23,9 @@ class Welcome extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  auth: state.auth,
-});
-
 Welcome.propTypes = {
   startSocket: PropTypes.func.isRequired,
 };
 
-export default connect(
-  mapStateToProps,
-  {
-    startSocket,
-  },
-)(Welcome);
+export default connect(null, { startSocket })(Welcome);
+
