@@ -1,4 +1,4 @@
-import { TOGGLE_APP, END_POS, FLOOR } from '../../constants';
+import { UPDATE_GRID, SELECT_FLOOR } from '../../constants';
 import { auditoriumWall, floorWall } from '../utils';
 import { SearchGrid, Agent, GridCell } from '../components/Grid/astar';
 
@@ -27,13 +27,13 @@ const initialState = {
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
-  switch (type) {
-    case END_POS:
-      const width = 25;
-      const height = 25;
-      const numCells = width * height;
-      let goalPos;
+  const width = 25;
+  const height = 25;
+  const numCells = width * height;
+  let goalPos;
 
+  switch (type) {
+    case UPDATE_GRID:
       for (let i = 0; i < numCells; i++) {
         if (payload.grid.cells[i].properties.goalPosition) {
           goalPos = i;
@@ -61,12 +61,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...payload,
         agent: new Agent(payload.grid),
       };
-    case TOGGLE_APP:
-      return {
-        ...state,
-        app: payload,
-      };
-    case FLOOR:
+    case SELECT_FLOOR:
       return {
         ...state,
         floor: payload,
