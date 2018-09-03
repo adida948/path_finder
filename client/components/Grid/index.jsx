@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { updateGrid } from '../../actions/grid';
@@ -14,38 +15,57 @@ class Grid extends Component {
   }
 
   nextMove() {
-    this.props.agent.step();
+    const {
+      agent,
+      grid,
+      floor,
+    } = this.props;
+
+    agent.step();
+
     this.props.updateGrid({
-      openList: this.props.agent.openList,
-      closedList: this.props.agent.closedList,
-      path: this.props.agent.path,
-      currentCell: this.props.agent.currentCell,
-      grid: this.props.grid,
-      floor: this.props.floor,
+      openList: agent.openList,
+      closedList: agent.closedList,
+      path: agent.path,
+      currentCell: agent.currentCell,
+      grid,
+      floor,
     });
   }
 
   run() {
-    this.props.agent.run();
+    const {
+      agent,
+      grid,
+      floor,
+    } = this.props;
+
+    agent.run();
     this.props.updateGrid({
-      openList: this.props.agent.openList,
-      closedList: this.props.agent.closedList,
-      path: this.props.agent.path,
-      currentCell: this.props.agent.currentCell,
-      grid: this.props.grid,
-      floor: this.props.floor,
+      openList: agent.openList,
+      closedList: agent.closedList,
+      path: agent.path,
+      currentCell: agent.currentCell,
+      grid,
+      floor,
     });
   }
 
   reset() {
-    this.props.agent.reset();
+    const {
+      agent,
+      grid,
+      floor,
+    } = this.props;
+
+    agent.reset();
     this.props.updateGrid({
-      openList: this.props.agent.openList,
-      closedList: this.props.agent.closedList,
-      path: this.props.agent.path,
-      currentCell: this.props.agent.currentCell,
-      grid: this.props.grid,
-      floor: this.props.floor,
+      openList: agent.openList,
+      closedList: agent.closedList,
+      path: agent.path,
+      currentCell: agent.currentCell,
+      grid,
+      floor,
     });
 
     if (this.autoRun) {
@@ -54,16 +74,22 @@ class Grid extends Component {
   }
 
   mouseEvent(cellIndex, evt) {
+    const {
+      agent,
+      grid,
+      floor,
+    } = this.props;
+
     if (evt.type === 'mouseup') {
       this.mouseAction = null;
-      this.props.grid.cells[cellIndex].removeProperty(['active']);
+      grid.cells[cellIndex].removeProperty(['active']);
       this.props.updateGrid({
-        grid: this.props.grid,
-        openList: this.props.agent.openList,
-        closedList: this.props.agent.closedList,
-        path: this.props.agent.path,
-        currentCell: this.props.agent.currentCell,
-        floor: this.props.floor,
+        grid,
+        openList: agent.openList,
+        closedList: agent.closedList,
+        path: agent.path,
+        currentCell: agent.currentCell,
+        floor,
       });
       return;
     }
@@ -191,6 +217,16 @@ const mapStateToProps = state => ({
   agent: state.agent,
   floor: state.floor,
 });
+
+Grid.propTypes = {
+  grid: PropTypes.object.isRequired,
+  openList: PropTypes.array.isRequired,
+  closedList: PropTypes.array.isRequired,
+  path: PropTypes.array.isRequired,
+  currentCell: PropTypes.number.isRequired,
+  agent: PropTypes.object.isRequired,
+  floor: PropTypes.string.isRequired,
+};
 
 export default connect(
   mapStateToProps,
