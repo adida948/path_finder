@@ -1789,15 +1789,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */(function(process) {
 
 module.exports = {
-  FLOOR: 'FLOOR',
-  TOGGLE_END_POS: 'TOGGLE_END_POS',
-  END_POS: 'END_POS',
-  SOCKET_EVENTS: ['END_POS'],
+  SELECT_FLOOR: 'SELECT_FLOOR',
+  UPDATE_GRID: 'UPDATE_GRID',
+  SOCKET_EVENTS: ['UPDATE_GRID'],
   PING_PONG: 'PING_PONG',
   rootUrl: function rootUrl() {
     return process.env.ROOT_URL || 'http://localhost:3000';
-  },
-  TOGGLE_APP: 'TOGGLE_APP'
+  }
 };
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
@@ -2394,34 +2392,22 @@ var matchPath = function matchPath(pathname) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.toggleFloors = exports.updateGrid = exports.startSocket = exports.setEndPos = undefined;
+exports.selectFloor = exports.updateGrid = undefined;
 
 var _constants = __webpack_require__(16);
 
 var _socket = __webpack_require__(131);
 
-var setEndPos = exports.setEndPos = function setEndPos(currentCell) {
-  return function () {
-    _socket.socket.emit(_constants.END_POS, currentCell);
-  };
-};
-
-var startSocket = exports.startSocket = function startSocket() {
-  return function (dispatch) {
-    (0, _socket.initSocket)(dispatch);
-  };
-};
-
 var updateGrid = exports.updateGrid = function updateGrid(obj) {
   return function () {
-    _socket.socket.emit(_constants.END_POS, obj);
+    _socket.socket.emit(_constants.UPDATE_GRID, obj);
   };
 };
 
-var toggleFloors = exports.toggleFloors = function toggleFloors(floor) {
+var selectFloor = exports.selectFloor = function selectFloor(floor) {
   return function (dispatch) {
     dispatch({
-      type: _constants.FLOOR,
+      type: _constants.SELECT_FLOOR,
       payload: floor
     });
   };
@@ -27751,7 +27737,7 @@ exports = module.exports = __webpack_require__(98)(false);
 
 
 // module
-exports.push([module.i, "html, body, section, article, h1, h2, p, span, label {\n  margin: 0;\n  border: 0;\n  padding: 0;\n  font: inherit;\n  text-align: inherit;\n  text-decoration: inherit;\n  color: inherit;\n  background: transparent;\n  width: inherit;\n  height: inherit; }\n\nul, li {\n  margin: 0;\n  padding: 0;\n  text-indent: 0;\n  list-style-type: 0;\n  list-style: none; }\n\nbody {\n  width: 100%;\n  height: 100%;\n  font-size: 15px;\n  font-family: 'Montserrat', sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  background: white; }\n\nbutton {\n  font-size: 1em;\n  transition: all .1s ease-in;\n  cursor: pointer;\n  height: 2.5em;\n  width: 10em;\n  background-color: #4080ff;\n  border: solid 1px white;\n  color: white;\n  border-radius: 100px;\n  box-shadow: none;\n  font-weight: bold;\n  line-height: 20px;\n  text-align: center;\n  padding: 6px 16px;\n  margin: 0 1em;\n  white-space: nowrap; }\n  button:focus {\n    outline: none; }\n\ninput[type=\"radio\"] {\n  visibility: hidden;\n  position: absolute; }\n\na {\n  text-decoration: none; }\n\n.header {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  width: 100%;\n  margin-top: 10px; }\n  .header__auth {\n    display: flex;\n    justify-content: flex-end;\n    margin-right: 10px; }\n  .header__auth--login {\n    background-color: white;\n    border: none;\n    font-family: 'Lato';\n    font-size: 14px; }\n    .header__auth--login:hover {\n      color: #de9b07; }\n  .header__auth--signup {\n    font-family: 'Lato';\n    font-size: 14px;\n    width: 111px;\n    height: 30px;\n    border: none;\n    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); }\n    .header__auth--signup:hover {\n      background-color: #de9b07; }\n  .header__about {\n    display: flex;\n    justify-content: flex-end;\n    width: 469px; }\n    .header__about button {\n      background-color: white;\n      border: none;\n      font-size: 18px;\n      font-family: 'Lato';\n      font-weight: 300;\n      border-radius: 0; }\n      .header__about button:hover {\n        border-bottom: 3px solid red; }\n  .header__about--who {\n    color: #27AE60; }\n  .header__about--what {\n    color: #F2994A; }\n  .header__about--why {\n    color: #2F80ED; }\n  .header__title {\n    font-family: 'Abril Fatface';\n    font-size: 36px;\n    color: #4080ff;\n    width: 190px;\n    height: 47px;\n    margin-left: 44px; }\n\n#map {\n  position: relative;\n  text-align: center;\n  height: 410px; }\n\nsvg {\n  position: absolute;\n  top: 0;\n  left: 0;\n  border: 2px solid #ccc;\n  -ms-user-select: none;\n  user-select: none; }\n\nsvg:hover {\n  cursor: pointer; }\n\nrect {\n  fill: white;\n  fill-opacity: 0.1; }\n\n.openList {\n  fill: #bdb;\n  fill-opacity: 1; }\n\n.closedList {\n  fill: white;\n  fill-opacity: 0.1; }\n\n.path {\n  fill: #99c;\n  fill-opacity: 1; }\n\n.current {\n  fill: #fff; }\n\n.wall {\n  fill-opacity: 0.1; }\n\n.startPosition {\n  fill: #d00;\n  stroke: #a11;\n  stroke-width: 2;\n  cursor: grab;\n  fill-opacity: 1; }\n\n.startPosition.active {\n  fill: #a11;\n  fill-opacity: 1; }\n\n.goalPosition {\n  fill: #0c0;\n  stroke: #191;\n  stroke-width: 2;\n  cursor: grab;\n  fill-opacity: 1; }\n\n.goalPosition.active {\n  fill: #191;\n  fill-opacity: 1; }\n\n#floor {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 375px;\n  height: 375px;\n  z-index: -1000; }\n\n#runBtn {\n  display: flex;\n  justify-content: center;\n  width: 60%;\n  margin: 0 auto; }\n\n.header__rightNav {\n  margin-right: 10px; }\n\n.app {\n  width: 100%;\n  height: 100%; }\n\n@media screen and (max-width: 630px) {\n  .header {\n    display: flex;\n    justify-content: space-between;\n    align-items: flex-start;\n    margin-top: 10px; }\n    .header__auth {\n      display: flex;\n      justify-content: flex-end;\n      margin: 0; }\n      .header__auth button {\n        width: 70px; }\n    .header__rightNav {\n      display: flex;\n      flex-direction: column; }\n    .header__auth--login {\n      background-color: white;\n      border: none;\n      font-family: 'Lato';\n      font-size: 14px;\n      margin-bottom: 5px;\n      width: 55px; }\n      .header__auth--login:hover {\n        color: #de9b07; }\n    .header__auth--signup {\n      font-family: 'Lato';\n      font-size: 14px;\n      width: 50px;\n      height: 30px;\n      border: none;\n      width: 72px;\n      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); }\n      .header__auth--signup:hover {\n        background-color: #de9b07; }\n    .header__about {\n      display: flex;\n      justify-content: flex-end;\n      width: 190px;\n      margin: 0;\n      padding: 0; }\n      .header__about button {\n        background-color: white;\n        border: none;\n        font-size: 16px;\n        font-family: 'Lato';\n        font-weight: 300;\n        border-radius: 0;\n        width: 100px;\n        margin: 0;\n        height: 24px;\n        padding: 0;\n        margin-left: 10px; }\n        .header__about button:hover {\n          border-bottom: 3px solid red; }\n    .header__about--who {\n      color: #27AE60; }\n    .header__about--what {\n      color: #F2994A; }\n    .header__about--why {\n      color: #2F80ED; }\n    .header__title {\n      font-family: 'Fredoka One';\n      font-size: 24px;\n      color: #4080ff;\n      width: 190px;\n      margin-left: 10px; }\n  .pic {\n    position: relative;\n    width: 100%; }\n    .pic__layer {\n      width: 100%;\n      filter: brightness(0.9); }\n    .pic #orangePic {\n      width: 100%;\n      height: 300px; }\n    .pic__text--main {\n      position: absolute;\n      top: 20px;\n      left: 51px;\n      width: 300px;\n      height: 200px;\n      overflow-wrap: break-word;\n      font-size: 28px;\n      font-family: 'Abril Fatface'; }\n    .pic__text--sub {\n      position: absolute;\n      z-index: 100;\n      top: 182px;\n      left: 51px;\n      width: 300px;\n      height: 56px;\n      overflow-wrap: break-word;\n      font-size: 18px;\n      font-family: 'Lato';\n      font-weight: bold; }\n    .pic__btns--apple {\n      position: absolute;\n      top: 242px;\n      margin: 0 auto;\n      background: none;\n      border: none;\n      width: 187px;\n      height: 45px;\n      padding: 0;\n      margin: 0; }\n    .pic__btns--google {\n      top: 600px;\n      left: 88px;\n      background: none;\n      border: none; }\n    .pic #apple {\n      position: static;\n      top: 293px;\n      margin: 0 auto;\n      width: 187px;\n      height: 45px;\n      border-radius: 20px; }\n      .pic #apple:hover {\n        border-radius: 20px; }\n    .pic #google {\n      position: absolute;\n      top: 600px;\n      left: 88px;\n      width: 187px;\n      height: 50px; }\n      .pic #google:hover {\n        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); }\n    .pic__testimony {\n      position: static;\n      display: flex;\n      flex-direction: row;\n      overflow: hidden; }\n    .pic__testimony--section {\n      display: flex;\n      flex-direction: column;\n      z-index: 1;\n      width: 200px;\n      height: 131.6px;\n      background-color: rgba(255, 255, 255, 0.75);\n      border-radius: 15px;\n      margin: 0 0 20px 0; }\n    .pic__testimony--text {\n      position: relative;\n      font-size: 14px;\n      font-family: 'Lato';\n      margin: 10px 0 0 16px;\n      width: 180px; }\n    .pic__testimony--name {\n      font-size: 12px;\n      font-family: 'Lato';\n      font-style: italic;\n      margin-left: 16px; }\n    .pic #testimony {\n      position: absolute;\n      top: 77px;\n      left: 0;\n      width: 57.13px;\n      height: 57.13px;\n      border-radius: 100px; }\n    .pic__text--mid {\n      width: 300px;\n      height: 77px;\n      font-size: 18px;\n      font-family: 'Abril Fatface';\n      text-align: center; }\n    .pic__bottom--pics {\n      display: flex;\n      width: 100%; }\n      .pic__bottom--pics img {\n        width: 50%;\n        height: 130px; }\n    .pic__text--bottomLayer {\n      width: 100%;\n      height: 130px;\n      display: flex;\n      justify-content: space-around;\n      align-items: center;\n      flex-direction: column; }\n    .pic__text--bottom {\n      width: 300px;\n      height: 69px;\n      font-size: 17px;\n      font-family: 'Abril Fatface'; }\n    .pic__btn--learn {\n      width: 200px;\n      height: 2em;\n      border: none; }\n      .pic__btn--learn:hover {\n        background-color: #de9b07; }\n    .pic__footer {\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      width: 100%;\n      height: 50px;\n      font-family: 'Abril Fatface';\n      margin: auto; }\n  .what img,\n  .who img,\n  .why img {\n    width: 100%;\n    height: 100vh; }\n  #botModal {\n    position: absolute;\n    display: none;\n    top: 0;\n    left: 0;\n    z-index: 1000; } }\n", ""]);
+exports.push([module.i, "html, body, section, article, h1, h2, p, span, label {\n  margin: 0;\n  border: 0;\n  padding: 0;\n  font: inherit;\n  text-align: inherit;\n  text-decoration: inherit;\n  color: inherit;\n  background: transparent;\n  width: inherit;\n  height: inherit; }\n\nul, li {\n  margin: 0;\n  padding: 0;\n  text-indent: 0;\n  list-style-type: 0;\n  list-style: none; }\n\nbody {\n  width: 100%;\n  height: 100%;\n  font-size: 15px;\n  font-family: 'Lato', sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  background: white; }\n\nbutton {\n  font-size: 1em;\n  transition: all .1s ease-in;\n  cursor: pointer;\n  height: 2.5em;\n  width: 10em;\n  background-color: #4080ff;\n  border: solid 1px white;\n  color: white;\n  border-radius: 100px;\n  box-shadow: none;\n  font-weight: bold;\n  line-height: 20px;\n  text-align: center;\n  padding: 6px 16px;\n  margin: 0 1em;\n  white-space: nowrap; }\n  button:focus {\n    outline: none; }\n\ninput[type=\"radio\"] {\n  visibility: hidden;\n  position: absolute; }\n\na {\n  text-decoration: none; }\n\n.app {\n  width: 400px;\n  margin: 0 auto; }\n\n.welcome {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center; }\n\n.title {\n  font-size: 25px;\n  font-family: 'Fredoka One';\n  color: #4080ff; }\n\n.header {\n  display: flex;\n  justify-content: space-between;\n  width: 100%; }\n  .header button {\n    background-color: white;\n    border: none;\n    font-size: 18px;\n    font-weight: 300;\n    border-radius: 0; }\n    .header button:hover {\n      border-bottom: 3px solid red; }\n  .header__btn--cafe {\n    color: #27AE60; }\n  .header__btn--floor {\n    color: #F2994A; }\n  .header__btn--aud {\n    color: #2F80ED; }\n\n.grid {\n  width: 100%; }\n\n#map {\n  position: relative;\n  text-align: center;\n  height: 410px; }\n\nsvg {\n  position: absolute;\n  top: 0;\n  left: 0;\n  border: 2px solid #ccc;\n  -ms-user-select: none;\n  user-select: none; }\n\nsvg:hover {\n  cursor: pointer; }\n\nrect {\n  fill: white;\n  fill-opacity: 0.1; }\n\n.openList {\n  fill: #bdb;\n  fill-opacity: 1; }\n\n.closedList {\n  fill: white;\n  fill-opacity: 0.1; }\n\n.path {\n  fill: #99c;\n  fill-opacity: 1; }\n\n.current {\n  fill: #fff; }\n\n.wall {\n  fill-opacity: 0.1; }\n\n.startPosition {\n  fill: #d00;\n  stroke: #a11;\n  stroke-width: 2;\n  cursor: grab;\n  fill-opacity: 1; }\n\n.startPosition.active {\n  fill: #a11;\n  fill-opacity: 1; }\n\n.goalPosition {\n  fill: #0c0;\n  stroke: #191;\n  stroke-width: 2;\n  cursor: grab;\n  fill-opacity: 1; }\n\n.goalPosition.active {\n  fill: #191;\n  fill-opacity: 1; }\n\n#floor {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: -1000; }\n\n#runBtn {\n  width: 100%;\n  margin: 10px 0 0 0; }\n", ""]);
 
 // exports
 
@@ -28429,13 +28415,13 @@ var rootReducer = function rootReducer() {
   var type = _ref.type,
       payload = _ref.payload;
 
-  switch (type) {
-    case _constants.END_POS:
-      var width = 25;
-      var height = 25;
-      var numCells = width * height;
-      var goalPos = void 0;
+  var width = 25;
+  var height = 25;
+  var numCells = width * height;
+  var goalPos = void 0;
 
+  switch (type) {
+    case _constants.UPDATE_GRID:
       for (var _i = 0; _i < numCells; _i++) {
         if (payload.grid.cells[_i].properties.goalPosition) {
           goalPos = _i;
@@ -28461,11 +28447,7 @@ var rootReducer = function rootReducer() {
       return _extends({}, state, payload, {
         agent: new _astar.Agent(payload.grid)
       });
-    case _constants.TOGGLE_APP:
-      return _extends({}, state, {
-        app: payload
-      });
-    case _constants.FLOOR:
+    case _constants.SELECT_FLOOR:
       return _extends({}, state, {
         floor: payload
       });
@@ -30701,7 +30683,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRedux = __webpack_require__(15);
 
-var _grid = __webpack_require__(28);
+var _socket = __webpack_require__(131);
 
 var _Grid = __webpack_require__(156);
 
@@ -30727,7 +30709,7 @@ var Welcome = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (Welcome.__proto__ || Object.getPrototypeOf(Welcome)).call(this, props));
 
-    _this.props.startSocket();
+    _this.props.initSocket();
     return _this;
   }
 
@@ -30737,6 +30719,11 @@ var Welcome = function (_Component) {
       return _react2.default.createElement(
         'div',
         { className: 'welcome' },
+        _react2.default.createElement(
+          'h1',
+          { className: 'title' },
+          'Path Finder'
+        ),
         _react2.default.createElement(_Header2.default, null),
         _react2.default.createElement(_Grid2.default, null)
       );
@@ -30747,10 +30734,10 @@ var Welcome = function (_Component) {
 }(_react.Component);
 
 Welcome.propTypes = {
-  startSocket: _propTypes2.default.func.isRequired
+  initSocket: _propTypes2.default.func.isRequired
 };
 
-exports.default = (0, _reactRedux.connect)(null, { startSocket: _grid.startSocket })(Welcome);
+exports.default = (0, _reactRedux.connect)(null, { initSocket: _socket.initSocket })(Welcome);
 
 /***/ }),
 /* 131 */
@@ -30774,20 +30761,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var socket = exports.socket = (0, _socket2.default)((0, _constants.rootUrl)());
 
-var initSocket = exports.initSocket = function initSocket(dispatch) {
-  socket.on('connect', function () {
-    console.log('WebSockets established!');
-  });
-
-  setInterval(function () {
-    socket.emit(_constants.PING_PONG);
-  }, 1000);
-
-  _constants.SOCKET_EVENTS.forEach(function (type) {
-    return socket.on(type, function (payload) {
-      dispatch({ type: type, payload: payload });
+var initSocket = exports.initSocket = function initSocket() {
+  return function (dispatch) {
+    socket.on('connect', function () {
+      return console.log('WebSockets established!');
     });
-  });
+
+    setInterval(function () {
+      socket.emit(_constants.PING_PONG);
+    }, 1000);
+
+    _constants.SOCKET_EVENTS.forEach(function (type) {
+      return socket.on(type, function (payload) {
+        dispatch({ type: type, payload: payload });
+      });
+    });
+  };
 };
 
 var socketOff = exports.socketOff = function socketOff() {
@@ -35993,6 +35982,10 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = __webpack_require__(2);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _reactRedux = __webpack_require__(15);
 
 var _grid = __webpack_require__(28);
@@ -36024,40 +36017,59 @@ var Grid = function (_Component) {
   _createClass(Grid, [{
     key: 'nextMove',
     value: function nextMove() {
-      this.props.agent.step();
+      var _props = this.props,
+          agent = _props.agent,
+          grid = _props.grid,
+          floor = _props.floor;
+
+
+      agent.step();
+
       this.props.updateGrid({
-        openList: this.props.agent.openList,
-        closedList: this.props.agent.closedList,
-        path: this.props.agent.path,
-        currentCell: this.props.agent.currentCell,
-        grid: this.props.grid,
-        floor: this.props.floor
+        openList: agent.openList,
+        closedList: agent.closedList,
+        path: agent.path,
+        currentCell: agent.currentCell,
+        grid: grid,
+        floor: floor
       });
     }
   }, {
     key: 'run',
     value: function run() {
-      this.props.agent.run();
+      var _props2 = this.props,
+          agent = _props2.agent,
+          grid = _props2.grid,
+          floor = _props2.floor;
+
+
+      agent.run();
       this.props.updateGrid({
-        openList: this.props.agent.openList,
-        closedList: this.props.agent.closedList,
-        path: this.props.agent.path,
-        currentCell: this.props.agent.currentCell,
-        grid: this.props.grid,
-        floor: this.props.floor
+        openList: agent.openList,
+        closedList: agent.closedList,
+        path: agent.path,
+        currentCell: agent.currentCell,
+        grid: grid,
+        floor: floor
       });
     }
   }, {
     key: 'reset',
     value: function reset() {
-      this.props.agent.reset();
+      var _props3 = this.props,
+          agent = _props3.agent,
+          grid = _props3.grid,
+          floor = _props3.floor;
+
+
+      agent.reset();
       this.props.updateGrid({
-        openList: this.props.agent.openList,
-        closedList: this.props.agent.closedList,
-        path: this.props.agent.path,
-        currentCell: this.props.agent.currentCell,
-        grid: this.props.grid,
-        floor: this.props.floor
+        openList: agent.openList,
+        closedList: agent.closedList,
+        path: agent.path,
+        currentCell: agent.currentCell,
+        grid: grid,
+        floor: floor
       });
 
       if (this.autoRun) {
@@ -36067,16 +36079,22 @@ var Grid = function (_Component) {
   }, {
     key: 'mouseEvent',
     value: function mouseEvent(cellIndex, evt) {
+      var _props4 = this.props,
+          agent = _props4.agent,
+          grid = _props4.grid,
+          floor = _props4.floor;
+
+
       if (evt.type === 'mouseup') {
         this.mouseAction = null;
-        this.props.grid.cells[cellIndex].removeProperty(['active']);
+        grid.cells[cellIndex].removeProperty(['active']);
         this.props.updateGrid({
-          grid: this.props.grid,
-          openList: this.props.agent.openList,
-          closedList: this.props.agent.closedList,
-          path: this.props.agent.path,
-          currentCell: this.props.agent.currentCell,
-          floor: this.props.floor
+          grid: grid,
+          openList: agent.openList,
+          closedList: agent.closedList,
+          path: agent.path,
+          currentCell: agent.currentCell,
+          floor: floor
         });
         return;
       }
@@ -36222,6 +36240,16 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
+Grid.propTypes = {
+  grid: _propTypes2.default.object.isRequired,
+  openList: _propTypes2.default.array.isRequired,
+  closedList: _propTypes2.default.array.isRequired,
+  path: _propTypes2.default.array.isRequired,
+  currentCell: _propTypes2.default.number.isRequired,
+  agent: _propTypes2.default.object.isRequired,
+  floor: _propTypes2.default.string.isRequired
+};
+
 exports.default = (0, _reactRedux.connect)(mapStateToProps, {
   updateGrid: _grid.updateGrid
 })(Grid);
@@ -36277,7 +36305,7 @@ var Header = function (_Component) {
       var _this2 = this;
 
       return function () {
-        _this2.props.toggleFloors(floor);
+        _this2.props.selectFloor(floor);
       };
     }
   }, {
@@ -36287,28 +36315,28 @@ var Header = function (_Component) {
         'div',
         { className: 'header' },
         _react2.default.createElement(
-          'h1',
-          { className: 'header__title' },
-          'Path Finder'
+          'button',
+          {
+            className: 'header__btn--cafe',
+            onClick: this.handleClick('cafe')
+          },
+          'Cafeteria'
         ),
         _react2.default.createElement(
-          'div',
-          { className: 'header__about' },
-          _react2.default.createElement(
-            'button',
-            { onClick: this.handleClick('cafe'), className: 'header__about--what' },
-            'Cafeteria'
-          ),
-          _react2.default.createElement(
-            'button',
-            { onClick: this.handleClick('floor'), className: 'header__about--who' },
-            'Floor'
-          ),
-          _react2.default.createElement(
-            'button',
-            { onClick: this.handleClick('aud'), className: 'header__about--why' },
-            'Auditorium'
-          )
+          'button',
+          {
+            className: 'header__btn--floor',
+            onClick: this.handleClick('floor')
+          },
+          'Floor'
+        ),
+        _react2.default.createElement(
+          'button',
+          {
+            className: 'header__btn--aud',
+            onClick: this.handleClick('aud')
+          },
+          'Auditorium'
         )
       );
     }
@@ -36317,18 +36345,12 @@ var Header = function (_Component) {
   return Header;
 }(_react.Component);
 
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    auth: state.auth
-  };
-};
-
 Header.propTypes = {
-  toggleFloors: _propTypes2.default.func.isRequired
+  selectFloor: _propTypes2.default.func.isRequired
 };
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, {
-  toggleFloors: _grid.toggleFloors
+exports.default = (0, _reactRedux.connect)(null, {
+  selectFloor: _grid.selectFloor
 })(Header);
 
 /***/ })
