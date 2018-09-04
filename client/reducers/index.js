@@ -22,7 +22,7 @@ const initialState = {
   openList: agent.openList,
   closedList: agent.closedList,
   path: agent.path,
-  currentCell: agent.currentCell,
+  currentCell: agent.currentCell || floorStart,
   floor: 'floor',
 };
 
