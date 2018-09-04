@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { initSocket } from '../../actions/socket';
 
 import Grid from '../Grid';
-import Header from '../Header';
+import Nav from '../Nav';
 
 class Welcome extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class Welcome extends Component {
     return (
       <div className="welcome">
         <h1 className="title">Path Finder</h1>
-        <Header />
+        <Nav />
         <Grid />
       </div>
     );
