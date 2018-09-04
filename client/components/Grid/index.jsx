@@ -12,6 +12,8 @@ class Grid extends Component {
     this.mouseAction = null;
     this.autoRun = false;
     this.cellStyles = this.cellStyles.bind(this);
+    this.run = this.run.bind(this);
+    this.mouseEvent = this.mouseEvent.bind(this);
   }
 
   nextMove() {
@@ -73,83 +75,92 @@ class Grid extends Component {
     }
   }
 
-  mouseEvent(cellIndex, evt) {
-    const {
-      agent,
-      grid,
-      floor,
-    } = this.props;
-
-    if (evt.type === 'mouseup') {
-      this.mouseAction = null;
-      grid.cells[cellIndex].removeProperty(['active']);
-      this.props.updateGrid({
+  mouseEvent(idx, evt) {
+    return (evt) => {
+      const {
+        agent,
         grid,
-        openList: agent.openList,
-        closedList: agent.closedList,
-        path: agent.path,
-        currentCell: agent.currentCell,
         floor,
-      });
-      return;
-    }
+      } = this.props;
 
-    // Ignore mouseover's without mousedown
-    if (evt.buttons !== 1 && evt.type !== 'click') {
-      this.mouseAction = null;
-      return;
-    }
-
-    if (this.mouseAction === null) {
-      if (this.props.grid.cells[cellIndex].getProperty('startPosition')) {
-        this.mouseAction = function (cellIndex) {
-          this.props.grid.removeAll('startPosition');
-          this.props.grid.cells[cellIndex].setProperty({ startPosition: true });
-        };
-      } else if (this.props.grid.cells[cellIndex].getProperty('goalPosition')) {
-        this.mouseAction = function (cellIndex) {
-          this.props.grid.removeAll('goalPosition');
-          this.props.grid.cells[cellIndex].setProperty({ goalPosition: true });
-        };
-      } else if (this.props.grid.cells[cellIndex].getProperty('wall')) {
-        this.mouseAction = function (cellIndex) {
-          this.props.grid.cells[cellIndex].removeProperty(['wall']);
-        };
-      } else {
-        this.mouseAction = function (cellIndex) {
-          this.props.grid.removeAll('goalPosition');
-          this.props.grid.cells[cellIndex].setProperty({ goalPosition: true });
-
-          this.props.updateGrid({
-            grid: this.props.grid,
-            floor: this.props.floor,
-          });
-        };
+      if (evt.type === 'mouseup') {
+        this.mouseAction = null;
+        grid.cells[idx].removeProperty(['active']);
+        this.props.updateGrid({
+          grid,
+          openList: agent.openList,
+          closedList: agent.closedList,
+          path: agent.path,
+          currentCell: agent.currentCell,
+          floor,
+        });
+        return;
       }
-    }
 
-    this.props.grid.cells[cellIndex].setProperty({ active: true });
-    this.mouseAction(cellIndex);
-    this.reset.bind(this);
+      // Ignore mouseover's without mousedown
+      if (evt.buttons !== 1 && evt.type !== 'click') {
+        this.mouseAction = null;
+        return;
+      }
+
+      if (this.mouseAction === null) {
+        if (this.props.grid.cells[idx].getProperty('startPosition')) {
+          this.mouseAction = function (idx) {
+            this.props.grid.removeAll('startPosition');
+            this.props.grid.cells[idx].setProperty({ startPosition: true });
+          };
+        } else if (this.props.grid.cells[idx].getProperty('goalPosition')) {
+          this.mouseAction = function (idx) {
+            this.props.grid.removeAll('goalPosition');
+            this.props.grid.cells[idx].setProperty({ goalPosition: true });
+          };
+        } else if (this.props.grid.cells[idx].getProperty('wall')) {
+          this.mouseAction = function (idx) {
+            this.props.grid.cells[idx].removeProperty(['wall']);
+          };
+        } else {
+          this.mouseAction = function (idx) {
+            this.props.grid.removeAll('goalPosition');
+            this.props.grid.cells[idx].setProperty({ goalPosition: true });
+
+            this.props.updateGrid({
+              grid: this.props.grid,
+              floor: this.props.floor,
+            });
+          };
+        }
+      }
+
+      this.props.grid.cells[idx].setProperty({ active: true });
+      this.mouseAction(idx);
+      this.reset.bind(this);
+    }
   }
 
-  cellStyles(cellIndex) {
+  cellStyles(idx) {
+    const {
+      currentCell,
+      path,
+      closedList,
+      grid,
+    } = this.props;
+
     let arr = [];
-    if (this.props.currentCell === cellIndex) {
+    if (currentCell === idx) {
       arr.push('current');
     }
-    if (this.props.path.indexOf(cellIndex) >= 0) {
+    if (path.indexOf(idx) >= 0) {
       arr.push('path');
     }
-    if (this.props.closedList.indexOf(cellIndex) >= 0) {
+    if (closedList.indexOf(idx) >= 0) {
       arr.push('closedList');
     }
 
-    if (this.props.grid.cells[cellIndex].getProperty('wall')) {
+    if (grid.cells[idx].getProperty('wall')) {
       arr.push('wall');
     }
 
-    arr = arr.concat(Object.keys(this.props.grid.cells[cellIndex].properties));
+    arr = arr.concat(Object.keys(grid.cells[idx].properties));
 
     return arr;
   }
@@ -162,32 +173,33 @@ class Grid extends Component {
   }
 
   render() {
+    const { grid, floor } = this.props;
     const cellSize = 15;
+    
+    if (grid) {
+      const svgProps = {
+        width: grid.width * cellSize + 1,
+        height: grid.height * cellSize + 1,
+      };
 
-    if (this.props.grid) {
       return (
         <div className="grid">
-          <div id="map">
-            <img id="floor" src={`${rootUrl()}/images/${this.props.floor}.png`} alt="floor" />
-            <svg
-              className={this.props.mouseActive ? 'mouseActive' : ''}
-              width={this.props.grid.width * cellSize + 1}
-              height={this.props.grid.height * cellSize + 1}
-            >
-              {this.props.grid.cells.map((cell, cellIndex) => {
-                const cellStyles = this.cellStyles(cellIndex);
-                console.log(cellSize);
+          <div className="grid__map">
+            <img src={`${rootUrl()}/images/${floor}.png`} alt="map" />
+            <svg { ...svgProps } >
+              {grid.cells.map((cell, idx) => {
+                const cellStyles = this.cellStyles(idx);
                 return (
                   <g
-                    key={cellIndex}
-                    onMouseDown={this.mouseEvent.bind(this, cellIndex)}
-                    onMouseOver={this.mouseEvent.bind(this, cellIndex)}
-                    onMouseUp={this.mouseEvent.bind(this, cellIndex)}
-                    onTouchEnd={this.mouseEvent.bind(this, cellIndex)}
+                    key={idx}
+                    onMouseDown={this.mouseEvent(idx)}
+                    onMouseOver={this.mouseEvent(idx)}
+                    onMouseUp={this.mouseEvent(idx)}
+                    onTouchEnd={this.mouseEvent(idx)}
                   >
                     <rect
-                      x={(cellIndex % this.props.grid.width) * cellSize + 1}
-                      y={Math.floor(cellIndex / this.props.grid.width) * cellSize + 1}
+                      x={(idx % grid.width) * cellSize + 1}
+                      y={Math.floor(idx / this.props.grid.width) * cellSize + 1}
                       width={cellSize - 1}
                       height={cellSize - 1}
                       className={cellStyles.join(' ')}
@@ -197,9 +209,7 @@ class Grid extends Component {
               })}
             </svg>
           </div>
-          <button id="runBtn" onClick={this.run.bind(this)}>
-            Find me!
-          </button>{' '}
+          <button onClick={this.run}>Find me!</button>
         </div>
       );
     }
@@ -213,7 +223,7 @@ const mapStateToProps = state => ({
   openList: state.openList,
   closedList: state.closedList,
   path: state.path,
-  currentCell: state.currentCell,
+  currentCell: state.currentCell || 210,
   agent: state.agent,
   floor: state.floor,
 });
