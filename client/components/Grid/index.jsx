@@ -17,11 +17,7 @@ class Grid extends Component {
   }
 
   nextMove() {
-    const {
-      agent,
-      grid,
-      floor,
-    } = this.props;
+    const { agent, grid, floor } = this.props;
 
     agent.step();
 
@@ -36,11 +32,7 @@ class Grid extends Component {
   }
 
   run() {
-    const {
-      agent,
-      grid,
-      floor,
-    } = this.props;
+    const { agent, grid, floor } = this.props;
 
     agent.run();
     this.props.updateGrid({
@@ -54,11 +46,7 @@ class Grid extends Component {
   }
 
   reset() {
-    const {
-      agent,
-      grid,
-      floor,
-    } = this.props;
+    const { agent, grid, floor } = this.props;
 
     agent.reset();
     this.props.updateGrid({
@@ -77,11 +65,7 @@ class Grid extends Component {
 
   mouseEvent(idx, evt) {
     return (evt) => {
-      const {
-        agent,
-        grid,
-        floor,
-      } = this.props;
+      const { agent, grid, floor } = this.props;
 
       if (evt.type === 'mouseup') {
         this.mouseAction = null;
@@ -134,16 +118,11 @@ class Grid extends Component {
       this.props.grid.cells[idx].setProperty({ active: true });
       this.mouseAction(idx);
       this.reset.bind(this);
-    }
+    };
   }
 
   cellStyles(idx) {
-    const {
-      currentCell,
-      path,
-      closedList,
-      grid,
-    } = this.props;
+    const { currentCell, path, closedList, grid } = this.props;
 
     let arr = [];
     if (currentCell === idx) {
@@ -172,10 +151,31 @@ class Grid extends Component {
     }
   }
 
+  renderRect(grid, cellSize) {
+    return grid.cells.map((cell, idx) => {
+      const cellStyles = this.cellStyles(idx);
+
+      return (
+        <rect
+          x={(idx % grid.width) * cellSize + 1}
+          y={Math.floor(idx / this.props.grid.width) * cellSize + 1}
+          width={cellSize - 1}
+          height={cellSize - 1}
+          className={cellStyles.join(' ')}
+          onMouseDown={this.mouseEvent(idx)}
+          onMouseOver={this.mouseEvent(idx)}
+          onMouseUp={this.mouseEvent(idx)}
+          onTouchEnd={this.mouseEvent(idx)}
+          key={idx}
+        />
+      );
+    });
+  }
+
   render() {
     const { grid, floor } = this.props;
     const cellSize = 15;
-    
+
     if (grid) {
       const svgProps = {
         width: grid.width * cellSize + 1,
@@ -186,28 +186,7 @@ class Grid extends Component {
         <div className="grid">
           <div className="grid__map">
             <img src={`${rootUrl()}/images/${floor}.png`} alt="map" />
-            <svg { ...svgProps } >
-              {grid.cells.map((cell, idx) => {
-                const cellStyles = this.cellStyles(idx);
-                return (
-                  <g
-                    key={idx}
-                    onMouseDown={this.mouseEvent(idx)}
-                    onMouseOver={this.mouseEvent(idx)}
-                    onMouseUp={this.mouseEvent(idx)}
-                    onTouchEnd={this.mouseEvent(idx)}
-                  >
-                    <rect
-                      x={(idx % grid.width) * cellSize + 1}
-                      y={Math.floor(idx / this.props.grid.width) * cellSize + 1}
-                      width={cellSize - 1}
-                      height={cellSize - 1}
-                      className={cellStyles.join(' ')}
-                    />
-                  </g>
-                );
-              })}
-            </svg>
+            <svg {...svgProps}>{this.renderRect(grid, cellSize)}</svg>
           </div>
           <button onClick={this.run}>Find me!</button>
         </div>
