@@ -96,15 +96,6 @@
     fill-opacity: 0.1;
   }
 
-  .openList {
-    fill: #bdb;
-    fill-opacity: 1;
-  }
-  .closedList {
-    fill: white;
-    fill-opacity: 0.1;
-  }
-
   .path {
     fill: #99c;
     fill-opacity: 1;
@@ -115,12 +106,9 @@
   }
 
   .wall {
-    fill:#777;
-    stroke:#666;
-    stroke-width:2;
-    fill: black;
-    fill-opacity: 1;
-    // fill-opacity: 0.1;
+    // fill: black;
+    // fill-opacity: 1;
+    fill-opacity: 0.1;
   }
 
   .startPosition {
@@ -131,21 +119,11 @@
     fill-opacity: 1;
   }
 
-  .startPosition.active {
-    fill: #a11;
-    fill-opacity: 1;
-  }
-
   .goalPosition {
     fill: #0c0;
     stroke: #191;
     stroke-width: 2;
     cursor: grab;
-    fill-opacity: 1;
-  }
-
-  .goalPosition.active {
-    fill: #191;
     fill-opacity: 1;
   }
 }
