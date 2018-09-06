@@ -1791,6 +1791,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 module.exports = {
   SELECT_FLOOR: 'SELECT_FLOOR',
   UPDATE_GRID: 'UPDATE_GRID',
+  SELECT_DESTINATION: 'SELECT_DESTINATION',
   SOCKET_EVENTS: ['UPDATE_GRID'],
   PING_PONG: 'PING_PONG',
   rootUrl: function rootUrl() {
@@ -6609,7 +6610,7 @@ module.exports = function(obj, fn){
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.selectFloor = exports.updateGrid = undefined;
+exports.selectDestination = exports.selectFloor = exports.updateGrid = undefined;
 
 var _constants = __webpack_require__(16);
 
@@ -6626,6 +6627,15 @@ var selectFloor = exports.selectFloor = function selectFloor(floor) {
     dispatch({
       type: _constants.SELECT_FLOOR,
       payload: floor
+    });
+  };
+};
+
+var selectDestination = exports.selectDestination = function selectDestination(destination) {
+  return function (dispatch) {
+    dispatch({
+      type: _constants.SELECT_DESTINATION,
+      payload: destination
     });
   };
 };
