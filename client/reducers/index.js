@@ -7,7 +7,7 @@ const auditoriumStart = 527;
 const floorStart = 210;
 grid.cells[floorStart].setProperty({ startPosition: true });
 grid.cells[2].setProperty({ goalPosition: true });
-for (let i = 0; i < auditoriumWall.length; i++) {
+for (let i = 0; i < floorWall.length; i++) {
   grid.cells[floorWall[i]].setProperty({ wall: true });
 }
 
