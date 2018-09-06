@@ -27795,7 +27795,7 @@ exports = module.exports = __webpack_require__(99)(false);
 
 
 // module
-exports.push([module.i, "html, body, section, article, h1, h2, p, span, label {\n  margin: 0;\n  border: 0;\n  padding: 0;\n  font: inherit;\n  text-align: inherit;\n  text-decoration: inherit;\n  color: inherit;\n  background: transparent;\n  width: inherit;\n  height: inherit; }\n\nul, li {\n  margin: 0;\n  padding: 0;\n  text-indent: 0;\n  list-style-type: 0;\n  list-style: none; }\n\nbody {\n  width: 100%;\n  height: 100%;\n  font-size: 15px;\n  font-family: 'Lato', sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  background: white; }\n\nbutton {\n  font-size: 1em;\n  transition: all .1s ease-in;\n  cursor: pointer;\n  height: 2.5em;\n  width: 10em;\n  background-color: #4080ff;\n  border: solid 1px white;\n  color: white;\n  border-radius: 100px;\n  box-shadow: none;\n  font-weight: bold;\n  line-height: 20px;\n  text-align: center;\n  padding: 6px 16px;\n  margin: 0 1em;\n  white-space: nowrap; }\n  button:focus {\n    outline: none; }\n\ninput[type=\"radio\"] {\n  visibility: hidden;\n  position: absolute; }\n\na {\n  text-decoration: none; }\n\n.app {\n  width: 379px;\n  margin: 0 auto; }\n\n.welcome {\n  display: flex;\n  flex-direction: column;\n  align-items: center; }\n\n.title {\n  font-size: 50px;\n  font-family: 'Fredoka One';\n  color: #4080ff;\n  width: 100%;\n  text-align: center;\n  border-radius: 10px; }\n\n.nav {\n  display: flex;\n  justify-content: space-between;\n  width: 100%; }\n  .nav button {\n    border: none;\n    font-size: 18px;\n    font-weight: 300;\n    border-radius: 0;\n    margin: 0;\n    height: 22px;\n    padding: 0;\n    background: white; }\n    .nav button:hover {\n      border-bottom: 3px solid red; }\n  .nav__btn--cafe {\n    color: #27ae60; }\n  .nav__btn--floor {\n    color: #f2994a; }\n  .nav__btn--aud {\n    color: #2f80ed; }\n\n.grid {\n  width: 100%;\n  text-align: center; }\n  .grid__map {\n    position: relative;\n    text-align: center;\n    height: 379px; }\n  .grid img {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    z-index: -10; }\n  .grid button {\n    width: 200px;\n    margin: 10px 0 0 0; }\n  .grid svg {\n    position: absolute;\n    top: 0;\n    left: 0;\n    border: 2px solid #ccc;\n    -ms-user-select: none;\n    user-select: none; }\n    .grid svg:hover {\n      cursor: pointer; }\n  .grid rect {\n    fill: white;\n    fill-opacity: 0.1; }\n  .grid .openList {\n    fill: #bdb;\n    fill-opacity: 1; }\n  .grid .closedList {\n    fill: white;\n    fill-opacity: 0.1; }\n  .grid .path {\n    fill: #99c;\n    fill-opacity: 1; }\n  .grid .current {\n    fill: #fff; }\n  .grid .wall {\n    fill: #777;\n    stroke: #666;\n    stroke-width: 2;\n    fill: black;\n    fill-opacity: 1; }\n  .grid .startPosition {\n    fill: #d00;\n    stroke: #a11;\n    stroke-width: 2;\n    cursor: grab;\n    fill-opacity: 1; }\n  .grid .startPosition.active {\n    fill: #a11;\n    fill-opacity: 1; }\n  .grid .goalPosition {\n    fill: #0c0;\n    stroke: #191;\n    stroke-width: 2;\n    cursor: grab;\n    fill-opacity: 1; }\n  .grid .goalPosition.active {\n    fill: #191;\n    fill-opacity: 1; }\n", ""]);
+exports.push([module.i, "html, body, section, article, h1, h2, p, span, label {\n  margin: 0;\n  border: 0;\n  padding: 0;\n  font: inherit;\n  text-align: inherit;\n  text-decoration: inherit;\n  color: inherit;\n  background: transparent;\n  width: inherit;\n  height: inherit; }\n\nul, li {\n  margin: 0;\n  padding: 0;\n  text-indent: 0;\n  list-style-type: 0;\n  list-style: none; }\n\nbody {\n  width: 100%;\n  height: 100%;\n  font-size: 15px;\n  font-family: 'Lato', sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  background: white; }\n\nbutton {\n  font-size: 1em;\n  transition: all .1s ease-in;\n  cursor: pointer;\n  height: 2.5em;\n  width: 10em;\n  background-color: #4080ff;\n  border: solid 1px white;\n  color: white;\n  border-radius: 100px;\n  box-shadow: none;\n  font-weight: bold;\n  line-height: 20px;\n  text-align: center;\n  padding: 6px 16px;\n  margin: 0 1em;\n  white-space: nowrap; }\n  button:focus {\n    outline: none; }\n\ninput[type=\"radio\"] {\n  visibility: hidden;\n  position: absolute; }\n\na {\n  text-decoration: none; }\n\n.app {\n  width: 379px;\n  margin: 0 auto; }\n\n.welcome {\n  display: flex;\n  flex-direction: column;\n  align-items: center; }\n\n.title {\n  font-size: 50px;\n  font-family: 'Fredoka One';\n  color: #4080ff;\n  width: 100%;\n  text-align: center;\n  border-radius: 10px; }\n\n.nav {\n  display: flex;\n  justify-content: space-between;\n  width: 100%; }\n  .nav button {\n    border: none;\n    font-size: 18px;\n    font-weight: 300;\n    border-radius: 0;\n    margin: 0;\n    height: 22px;\n    padding: 0;\n    background: white; }\n    .nav button:hover {\n      border-bottom: 3px solid red; }\n  .nav__btn--cafe {\n    color: #27ae60; }\n  .nav__btn--floor {\n    color: #f2994a; }\n  .nav__btn--aud {\n    color: #2f80ed; }\n\n.grid {\n  width: 100%;\n  text-align: center; }\n  .grid__map {\n    position: relative;\n    text-align: center;\n    height: 379px; }\n  .grid img {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    z-index: -10; }\n  .grid button {\n    width: 200px;\n    margin: 10px 0 0 0; }\n  .grid svg {\n    position: absolute;\n    top: 0;\n    left: 0;\n    border: 2px solid #ccc;\n    -ms-user-select: none;\n    user-select: none; }\n    .grid svg:hover {\n      cursor: pointer; }\n  .grid rect {\n    fill: white;\n    fill-opacity: 0.1; }\n  .grid .path {\n    fill: #99c;\n    fill-opacity: 1; }\n  .grid .current {\n    fill: #fff; }\n  .grid .wall {\n    fill-opacity: 0.1; }\n  .grid .startPosition {\n    fill: #d00;\n    stroke: #a11;\n    stroke-width: 2;\n    cursor: grab;\n    fill-opacity: 1; }\n  .grid .goalPosition {\n    fill: #0c0;\n    stroke: #191;\n    stroke-width: 2;\n    cursor: grab;\n    fill-opacity: 1; }\n", ""]);
 
 // exports
 
@@ -36191,10 +36191,30 @@ var Grid = function (_Component) {
       }
     }
   }, {
-    key: 'render',
-    value: function render() {
+    key: 'renderRect',
+    value: function renderRect(grid, cellSize) {
       var _this3 = this;
 
+      return grid.cells.map(function (cell, idx) {
+        var cellStyles = _this3.cellStyles(idx);
+
+        return _react2.default.createElement('rect', {
+          x: idx % grid.width * cellSize + 1,
+          y: Math.floor(idx / _this3.props.grid.width) * cellSize + 1,
+          width: cellSize - 1,
+          height: cellSize - 1,
+          className: cellStyles.join(' '),
+          onMouseDown: _this3.mouseEvent(idx),
+          onMouseOver: _this3.mouseEvent(idx),
+          onMouseUp: _this3.mouseEvent(idx),
+          onTouchEnd: _this3.mouseEvent(idx),
+          key: idx
+        });
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
       var _props6 = this.props,
           grid = _props6.grid,
           floor = _props6.floor;
@@ -36217,26 +36237,7 @@ var Grid = function (_Component) {
             _react2.default.createElement(
               'svg',
               svgProps,
-              grid.cells.map(function (cell, idx) {
-                var cellStyles = _this3.cellStyles(idx);
-                return _react2.default.createElement(
-                  'g',
-                  {
-                    key: idx,
-                    onMouseDown: _this3.mouseEvent(idx),
-                    onMouseOver: _this3.mouseEvent(idx),
-                    onMouseUp: _this3.mouseEvent(idx),
-                    onTouchEnd: _this3.mouseEvent(idx)
-                  },
-                  _react2.default.createElement('rect', {
-                    x: idx % grid.width * cellSize + 1,
-                    y: Math.floor(idx / _this3.props.grid.width) * cellSize + 1,
-                    width: cellSize - 1,
-                    height: cellSize - 1,
-                    className: cellStyles.join(' ')
-                  })
-                );
-              })
+              this.renderRect(grid, cellSize)
             )
           ),
           _react2.default.createElement(
