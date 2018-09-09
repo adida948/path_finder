@@ -217,9 +217,6 @@ Grid.propTypes = {
   floor: PropTypes.string.isRequired,
 };
 
-export default connect(
-  mapStateToProps,
-  {
-    updateGrid,
-  },
-)(Grid);
+export default connect(mapStateToProps, {
+  updateGrid,
+})(Grid);

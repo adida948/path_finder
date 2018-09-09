@@ -28443,29 +28443,33 @@ var _utils = __webpack_require__(105);
 
 var _astar = __webpack_require__(106);
 
-var grid = new _astar.SearchGrid(25, 25);
-var auditoriumStart = 527;
-var floorStart = 210;
-grid.cells[floorStart].setProperty({ startPosition: true });
-grid.cells[2].setProperty({ goalPosition: true });
-for (var i = 0; i < _utils.floorWall.length; i++) {
-  grid.cells[_utils.floorWall[i]].setProperty({ wall: true });
-}
+var generateInitialState = function generateInitialState(width, height) {
+  var grid = new _astar.SearchGrid(width, height);
+  var auditoriumStart = 527;
+  var floorStart = 210;
+  grid.cells[floorStart].setProperty({ startPosition: true });
+  grid.cells[2].setProperty({ goalPosition: true });
+  for (var i = 0; i < _utils.floorWall.length; i++) {
+    grid.cells[_utils.floorWall[i]].setProperty({ wall: true });
+  }
 
-var agent = new _astar.Agent(grid);
+  var agent = new _astar.Agent(grid);
 
-var initialState = {
-  endPos: 211,
-  endPosBool: false,
-  app: false,
-  grid: grid,
-  agent: agent,
-  openList: agent.openList,
-  closedList: agent.closedList,
-  path: agent.path,
-  currentCell: agent.currentCell || floorStart,
-  floor: 'floor'
+  return {
+    endPos: 211,
+    endPosBool: false,
+    app: false,
+    grid: grid,
+    agent: agent,
+    openList: agent.openList,
+    closedList: agent.closedList,
+    path: agent.path,
+    currentCell: agent.currentCell || floorStart,
+    floor: 'floor'
+  };
 };
+
+var initialState = generateInitialState(25, 25);
 
 var rootReducer = function rootReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -28480,10 +28484,10 @@ var rootReducer = function rootReducer() {
 
   switch (type) {
     case _constants.UPDATE_GRID:
-      for (var _i = 0; _i < numCells; _i++) {
-        if (payload.grid.cells[_i].properties.goalPosition) {
-          goalPos = _i;
-          payload.grid.cells[_i] = new _astar.GridCell(payload.grid.cells[_i].properties);
+      for (var i = 0; i < numCells; i++) {
+        if (payload.grid.cells[i].properties.goalPosition) {
+          goalPos = i;
+          payload.grid.cells[i] = new _astar.GridCell(payload.grid.cells[i].properties);
         }
       }
 
@@ -28491,13 +28495,13 @@ var rootReducer = function rootReducer() {
       payload.grid.cells[goalPos].setProperty({ goalPosition: true });
 
       if (payload.floor === 'aud') {
-        for (var _i2 = 0; _i2 < _utils.auditoriumWall.length; _i2++) {
-          payload.grid.cells[_utils.auditoriumWall[_i2]].setProperty({ wall: true });
+        for (var _i = 0; _i < _utils.auditoriumWall.length; _i++) {
+          payload.grid.cells[_utils.auditoriumWall[_i]].setProperty({ wall: true });
           payload.grid.cells[auditoriumStart].setProperty({ startPosition: true });
         }
       } else {
-        for (var _i3 = 0; _i3 < _utils.floorWall.length; _i3++) {
-          payload.grid.cells[_utils.floorWall[_i3]].setProperty({ wall: true });
+        for (var _i2 = 0; _i2 < _utils.floorWall.length; _i2++) {
+          payload.grid.cells[_utils.floorWall[_i2]].setProperty({ wall: true });
           payload.grid.cells[floorStart].setProperty({ startPosition: true });
         }
       }
