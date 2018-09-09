@@ -12,7 +12,7 @@ export const selectFloor = floor => (dispatch) => {
   });
 };
 
-export const selectDestination = (destination) => (dispatch) => {
+export const selectDestination = destination => (dispatch) => {
   dispatch({
     type: SELECT_DESTINATION,
     payload: destination,
