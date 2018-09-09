@@ -36343,26 +36343,17 @@ var Nav = function (_Component) {
         { className: 'nav' },
         _react2.default.createElement(
           'button',
-          {
-            className: 'nav__btn--cafe',
-            onClick: this.handleClick('cafe')
-          },
+          { className: 'nav__btn--cafe', onClick: this.handleClick('cafe') },
           'Restroom'
         ),
         _react2.default.createElement(
           'button',
-          {
-            className: 'nav__btn--floor',
-            onClick: this.handleClick('floor')
-          },
+          { className: 'nav__btn--floor', onClick: this.handleClick('floor') },
           'Snack Room'
         ),
         _react2.default.createElement(
           'button',
-          {
-            className: 'nav__btn--aud',
-            onClick: this.handleClick('aud')
-          },
+          { className: 'nav__btn--aud', onClick: this.handleClick('aud') },
           'Table Tennis'
         )
       );
@@ -36373,11 +36364,13 @@ var Nav = function (_Component) {
 }(_react.Component);
 
 Nav.propTypes = {
-  selectFloor: _propTypes2.default.func.isRequired
+  selectFloor: _propTypes2.default.func.isRequired,
+  selectDestination: _propTypes2.default.func.isRequired
 };
 
 exports.default = (0, _reactRedux.connect)(null, {
-  selectFloor: _grid.selectFloor
+  selectFloor: _grid.selectFloor,
+  selectDestination: _grid.selectDestination
 })(Nav);
 
 /***/ })
