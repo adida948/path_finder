@@ -10,9 +10,10 @@ export const initSocket = () => (dispatch) => {
     socket.emit(PING_PONG);
   }, 1000);
 
-  SOCKET_EVENTS.forEach(type => socket.on(type, (payload) => {
-    dispatch({ type, payload });
-  }));
+  SOCKET_EVENTS.forEach(type =>
+    socket.on(type, (payload) => {
+      dispatch({ type, payload });
+    }));
 };
 
 export const socketOff = () => () => {
