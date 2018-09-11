@@ -64,6 +64,11 @@
     height: 379px;
   }
 
+  button {
+    width: 200px;
+    margin: 10px 0 0 0;
+  }
+
   img {
     position: absolute;
     top: 0;
@@ -73,18 +78,10 @@
     z-index: -10;
   }
 
-  button {
-    width: 200px;
-    margin: 10px 0 0 0;
-  }
-
   svg {
     position: absolute;
     top: 0;
     left: 0;
-    border: 2px solid #ccc;
-    -ms-user-select: none;
-    user-select: none;
 
     &:hover {
       cursor: pointer;
