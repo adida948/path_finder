@@ -5,5 +5,5 @@
 - A* algorithm
 
 ### Local set up
-`webpack -w`
-`npm run dev`
+  - `webpack -w`
+  - `npm run dev`
