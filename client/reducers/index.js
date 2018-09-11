@@ -51,12 +51,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
       if (payload.floor === 'aud') {
         for (let i = 0; i < auditoriumWall.length; i++) {
           payload.grid.cells[auditoriumWall[i]].setProperty({ wall: true });
-          payload.grid.cells[auditoriumStart].setProperty({ startPosition: true });
+          payload.grid.cells[527].setProperty({ startPosition: true });
         }
       } else {
         for (let i = 0; i < floorWall.length; i++) {
           payload.grid.cells[floorWall[i]].setProperty({ wall: true });
-          payload.grid.cells[floorStart].setProperty({ startPosition: true });
+          payload.grid.cells[210].setProperty({ startPosition: true });
         }
       }
 
